@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  email: MyString
+  crypted_password: 
+  uid: MyString
+  provider: MyString
+  start_at: 2012-09-13
+  end_at: 2012-09-13
+
+two:
+  name: MyString
+  email: MyString
+  crypted_password: 
+  uid: MyString
+  provider: MyString
+  start_at: 2012-09-13
+  end_at: 2012-09-13
