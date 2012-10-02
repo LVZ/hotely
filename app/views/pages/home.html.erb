@@ -1,2 +1,14 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% provide(:title, 'Home') %>
+
+<!DOCTYPE html>
+<html>
+<div class="center hero-unit">
+<h1>Welcome to Hotel Rilana</h1>
+<title>Hotel Rilana | <%= yield(:title) %></title>
+
+<%= link_to "Sign in", signup_path, class: "btn btn-large btn-primary" %>
+</div>
+
+<img alt="beach" src="/assets/beach.JPG" width="150" height="150" />
+
+</html>

@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def home
   end
 
-  def usersign
+  def signup
   end
 
   def contact

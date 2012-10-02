@@ -1,10 +1,10 @@
 Hotely::Application.routes.draw do
 
-  get "pages/home"
+  root to: 'pages#home'
 
-  get "pages/usersign"
+  match '/signup', to: 'users#new'
 
-  get "pages/contact"
+  match '/contact', to: 'pages#contact'
 
 resources :users
 resources :activities
