@@ -1,13 +1,19 @@
 Hotely::Application.routes.draw do
 
+resources :users
+resources :activities
+resources :trips
+resources :sessions, only: [:new, :create, :destroy]
+
   root to: 'pages#home'
 
   match '/signup', to: 'users#new'
 
   match '/contact', to: 'pages#contact'
 
-resources :users
-resources :activities
+ match '/signin', to: 'sessions#new'
+
+
 
 
 

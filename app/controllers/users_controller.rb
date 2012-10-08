@@ -7,9 +7,11 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new
+		@user = User.new(params[:user])
 		if @user.save
+			sign_in @user
 			flash[:success] = "Welcome to the E-Concierge Application!"
+			# Handle a successful save.
 			redirect_to @user
 		else
 			render 'new'
