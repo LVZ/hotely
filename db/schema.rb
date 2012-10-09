@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008172446) do
+ActiveRecord::Schema.define(:version => 20121008221304) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -44,11 +44,12 @@ ActiveRecord::Schema.define(:version => 20121008172446) do
     t.string   "provider"
     t.date     "start_at"
     t.date     "end_at"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "remember_token"
+    t.boolean  "admin",                        :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
