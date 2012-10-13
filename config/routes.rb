@@ -2,20 +2,21 @@ Hotely::Application.routes.draw do
 
 resources :authentications
 resources :registrations
-resources :users
 resources :activities
 resources :trips
 resources :sessions, only: [:new, :create, :destroy]
+resources :users
 
 match '/auth/:provider/callback', to: 'authentications#create'
-
 match '/signup', to: 'users#new'
 
 match '/contact', to: 'pages#contact'
 
 match '/signin', to: 'sessions#new'
 
-match '/signout', to: 'sessions#destroy'
+match '/signout', to: 'sessions#destroy', as: 'signout'
+
+match '/auth/failure', to: redirect('/')
 
 match '/auth/:provider/callback', to: 'sessions#create'
 

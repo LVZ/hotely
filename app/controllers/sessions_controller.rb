@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 	def create
 		if request.env['omniauth.auth']
 			user = User.find_or_create_from_auth_has(request.env['omniauth.auth'])
+			session[:user_id] = user.id
 			if user.valid?
 				auto_login user
 				redirect_back_or_to current_user
@@ -26,6 +27,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
+		session[:user_id] = nil
 		logout
 		redirect_to root_url
 	end
