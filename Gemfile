@@ -9,7 +9,9 @@ gem 'bootstrap-sass', '2.0.4'
 gem 'sorcery', '~> 0.7'
 gem 'sqlite3'
 gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'authbuttons-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

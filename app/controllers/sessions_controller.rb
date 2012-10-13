@@ -4,25 +4,30 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		email = params[:session][:email]
-		password = params[:session][:password]
-		##logger.debug email
-		##logger.debug password
-
-		user = User.find_by_email(params[:session][:email].downcase)
-
-   		if user && user.authenticate(params[:session][:password])
-   			   # Sign the user in and redirect to the user's show page.
-   			sign_in user   
-			redirect_back_or user, notice: "Welcome, #{current_user.name}"
+		if request.env['omniauth.auth']
+			user = User.find_or_create_from_auth_has(request.env['omniauth.auth'])
+			if user.valid?
+				auto_login user
+				redirect_back_or_to current_user
+			else
+				render :new
+			end
 		else
-			flash.now[:error] = "Wrong password/username"
-			render :new 	
-		end	
+			email = params[:session][:email]
+			password = params[:session][:password]
+
+	   		if login email, password
+				redirect_back_or_to current_user, notice: "Welcome, #{current_user.name}"
+			else
+				flash.now[:error] = "Wrong password/username"
+				render :new
+			end
+		end
 	end
 
 	def destroy
-		sign_out
+		logout
 		redirect_to root_url
-	end	
+	end
+
 end

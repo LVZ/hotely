@@ -1,20 +1,22 @@
 class User < ActiveRecord::Base
+  has_many :authentications
   authenticates_with_sorcery!
   has_and_belongs_to_many :activities
-  
+  has_and_belongs_to_many :trips
+
 before_save { |user| user.email = email.downcase }
-before_save :create_remember_token
 
   attr_accessible :email
-
   attr_accessible :end_at
   attr_accessible :name
   attr_accessible :provider
   attr_accessible :start_at
   attr_accessible :uid
-  
+  attr_accessible :password
+  attr_accessible :password_confirmation
+
   attr_accessor :password_confirmation
-  attr_accessor :password 
+  attr_accessor :password
 
 
  validates :name, presence: true
@@ -22,10 +24,12 @@ before_save :create_remember_token
  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
 			uniqueness: { case_sensitive: false }
 
-private
+def apply_ominauth(omniauth)
+  self.email = omniauth['user_info']['email'] if email.blank?
+  authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+end
 
-  def create_remember_token
-    self.remember_token = SecureRandom.urlsafe_base64
-    
-  end
+def self.find_or_create_from_auth_hash(auth_hash)
+  Rails.logger.debug auth_auth
+end
 end
